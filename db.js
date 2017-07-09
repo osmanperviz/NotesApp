@@ -1,8 +1,9 @@
 import  mongoose from 'mongoose';
 
 mongoose.Promise = global.Promise;
+
 mongoose.connection.on('error', (err) => {
-  console.error(`Error in server.js--mongoose connection → ${err.message}`);
+  console.error(`Error in app.js--mongoose connection → ${err.message}`);
 });
 
 mongoose.connection.on('open', () => {
