@@ -1,9 +1,16 @@
-const mongoose = require('mongoose');
+import  mongoose from 'mongoose';
 
-mongoose.connect("mongodb://localhost:27017/notes-app");
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
   console.error(`Error in server.js--mongoose connection → ${err.message}`);
 });
 
-module.exports = mongoose;
+mongoose.connection.on('open', () => {
+  console.log(`Mongoose connected at notes-app`);
+});
+
+mongoose.connection.on('close', () => {
+  console.log('Mongoose connection closed');
+});
+
+export default mongoose;
