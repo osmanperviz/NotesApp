@@ -1,13 +1,13 @@
 import express from 'express';
-import  AuthController from './backend/controllers/authController.js'
+import AuthController from './backend/controllers/authController'
+import RegistrationController from './backend/controllers/registrationController'
+import passport from './backend/config/passport'
 
 const router = express.Router();
 
-//router.route('/login')
-/** GET /api/login - User login*/
-  //.get(AuthController.login)
+router.post('/login', AuthController.login)
 
-router.get('/login',AuthController.login)
+router.post('/register', RegistrationController.register)
 
 
 export default router
