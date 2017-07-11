@@ -6,7 +6,7 @@ class AuthController {
  static async login (req, res, next) {
    const { username, password } = req.body
     try {
-      const token = await AuthService.autenticate({ username: username, password: password })
+      const token = await AuthService.login({ username: username, password: password })
       res.status(200).json({ token: token })
     } catch (error) {
       res.status(error.status).json({ message: error.message })

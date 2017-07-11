@@ -5,25 +5,19 @@ import bcrypt from 'bcrypt-nodejs'
  const UserSchema = new mongoose.Schema({
   password: {
     type: String,
+    select: false,
     required: 'Please Supply an email address',
   },
   username: {
     type: String,
     required: 'Please supply a name',
-  },
-  token: {
-    type: String
   }
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 
-UserSchema.methods.generateHash = (password) => {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
-
-UserSchema.methods.validPassword = (password) => {
-    return bcrypt.compareSync(password, this.local.password);
+UserSchema.methods.isValidPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
 };
 
 export default mongoose.model('User', UserSchema);

@@ -7,36 +7,29 @@ import User from '../models/user'
 
 class RegistrationService {
 
-  static register(credentials) {
-    return new Promise((resolve, reject) => {
-      debugger;
-      const { username, password } = credentials
-      if (username === undefined && password === undefined) reject(new APIError('Username or password not provided', HttpStatus.UNAUTHORIZED, true))
+  static async register(credentials) {
+    const { username, password } = credentials
 
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(password, salt);
+    if (username === undefined && password === undefined) return Promise.reject(new APIError('Username or password not provided', HttpStatus.UNAUTHORIZED, true))
 
-      const newUser = new user({
-  			username: name,
-  			password: hash,
-  			created_at: new Date()
-  		});
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
 
-      // newUser.save()
-      // //.then((user) => resolve({ token: jwt.sign(user, config.secret) }))
-      // .then((user) => resolve({supe: "ksksksk"}))
-      // .catch(err => {
-      //   // if(err.code === 11000) {
-      //   //   reject(new APIError('User Already Registered!', 409, true))
-      //   // } else {
-      //   //   reject(new APIError('Database error', HttpStatus.INTERNAL_SERVER_ERROR, true))
-      //   // }
-      //   reject(err)
-      // })
+    const newUser = new User({
+			username: username,
+			password: hash,
+			created_at: new Date()
+		});
 
-      resolve({user: newUser})
+    try {
+      const savedUser = await newUser.save()
+      const token = jwt.sign(savedUser._id, config.secret)
 
-    })
+      return Promise.resolve({token: token})
+    } catch (error) {
+      return Promise.reject(new APIError(error.message, error.status, true))
+    }
+
   }
 }
 
