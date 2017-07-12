@@ -9,5 +9,7 @@ router.post('/login', AuthController.login)
 
 router.post('/register', RegistrationController.register)
 
+router.get('/notes', NotesController.all)
+
 
 export default router

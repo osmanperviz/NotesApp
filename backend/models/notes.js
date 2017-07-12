@@ -1,20 +1,20 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs'
 
-const UserSchema = new mongoose.Schema({
-  password: {
+const NotesSchema = new mongoose.Schema({
+  title: {
     type: String,
-    select: false,
-    required: 'Please Supply an email address',
+    required: 'Please Supply an title',
   },
-  username: {
+  _creator: {
+    type: Number,
+    ref: 'User'
+  },
+  status: {
     type: String,
-    required: 'Please supply a name',
-  },
-  notes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Notes'
-  }]
+    enum: ['UNFINISHED', 'FINISHED']
+    default: 'UNFINISHED'
+  }
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
