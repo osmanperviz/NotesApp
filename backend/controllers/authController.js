@@ -1,4 +1,3 @@
-import passport from '../config/passport'
 import AuthService from '../services/authService'
 
 class AuthController {

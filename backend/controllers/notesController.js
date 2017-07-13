@@ -6,13 +6,13 @@ import CreateNoteService from '../services/createNoteservice'
 class NotesController {
 
   static async all (req, res, next) {
-    const notes = await Notes.find({_creator: currentUser.id});
+    const notes = await Notes.find({ _creator: currentUser.id });
     res.status(200).json({ notes: notes })
   }
 
   static async update (req, res, next) {e
     try {
-      const newNotes = await CreateNoteService.perform({ title: title, creator: currentUser.id})
+      const newNotes = await CreateNoteService.perform({ title: title, creator: ObjectId(req.rcurrentUser.id) })
       res.status(200).json({ notes: newNotes })
     } catch (error) {
       res.status(error.status).json({ message: error.message })
@@ -20,17 +20,16 @@ class NotesController {
   }
 
   static async create (req, res, next) {
-    const { title } = req.body
     try {
-      const newNotes = await CreateNoteService.perform({ title: title, creator: currentUser.id})
-      res.status(200).json({ notes: newNotes })
+      const newNote = await CreateNoteService.perform({ title: req.body.title, creator: req.currentUser.id })
+      res.status(200).json({ notes: newNote })
     } catch (error) {
-      res.status(error.status).json({ message: error.message })
+      res.status(500).json({ message: error.message })
     }
   }
 
   static async delete (req, res, next) {
-    
+
   }
 
   static async show (req, res, next) {

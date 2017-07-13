@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs'
+const Schema = mongoose.Schema
+
 
 const UserSchema = new mongoose.Schema({
   password: {
@@ -13,11 +15,9 @@ const UserSchema = new mongoose.Schema({
   },
   notes: [{
     type: Schema.Types.ObjectId,
-    ref: 'Notes'
+    ref: 'Notes',
   }]
 });
-
-UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 
 UserSchema.methods.isValidPassword = function (password) {
   return bcrypt.compareSync(password, this.password);

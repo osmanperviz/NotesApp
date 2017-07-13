@@ -1,9 +1,10 @@
-import passport from 'passport';
 import HttpStatus from 'http-status';
 import jwt from 'jsonwebtoken'
 import config from '../config/config'
 import APIError from '../helpers/apiError';
 import User from '../models/user'
+import mongoose from 'mongoose'
+
 
 class AuthService {
 
@@ -19,7 +20,7 @@ class AuthService {
 
       if(!user.isValidPassword(password)) return Promise.reject(new APIError('Not valid password', HttpStatus.UNAUTHORIZED, true))
 
-      const token = jwt.sign(user._id, config.secret)
+      const token = jwt.sign(user.username, config.secret)
 
       return Promise.resolve({ token: token })
 
@@ -30,8 +31,19 @@ class AuthService {
     }
   }
 
-  static async autenticate() {
-    
+  static async autenticate(req, res, next) {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    if(!token) return res.status(HttpStatus.UNAUTHORIZED).json({ message: "Not provided valid token" });
+
+    try {
+      const decodedToken = await jwt.verify(token, config.secret);
+      req.currentUser = { username: decodedToken._doc.username, id:  mongoose.Types.ObjectId(decodedToken._doc._id) };
+      next();
+    } catch (error) {
+      return res.status(error.status).json({ message: error.message });
+    }
+
   }
 }
 

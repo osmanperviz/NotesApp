@@ -23,7 +23,7 @@ class RegistrationService {
 
     try {
       const savedUser = await newUser.save()
-      const token = jwt.sign(savedUser._id, config.secret)
+      const token = jwt.sign(savedUser, config.secret)
 
       return Promise.resolve({token: token})
     } catch (error) {

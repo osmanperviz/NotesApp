@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs'
+const ObjectId = mongoose.Schema.ObjectId
 
 const NotesSchema = new mongoose.Schema({
   title: {
@@ -7,20 +8,14 @@ const NotesSchema = new mongoose.Schema({
     required: 'Please Supply an title',
   },
   _creator: {
-    type: Number,
+    type: ObjectId,
     ref: 'User'
   },
   status: {
     type: String,
-    enum: ['UNFINISHED', 'FINISHED']
+    enum: ['UNFINISHED', 'FINISHED'],
     default: 'UNFINISHED'
   }
 });
 
-UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
-
-UserSchema.methods.isValidPassword = function (password) {
-  return bcrypt.compareSync(password, this.password);
-};
-
-export default mongoose.model('User', UserSchema);
+export default mongoose.model('Notes', NotesSchema);
