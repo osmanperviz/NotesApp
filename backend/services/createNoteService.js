@@ -6,7 +6,6 @@ import APIError from '../helpers/apiError';
 class CreateNoteService {
 
   static async perform(params) {
-    debugger;
     const { title, creator } = params
     if (title === undefined && creator === undefined) return Promise.reject(new APIError('Bad Parametars', HttpStatus.BAD_REQUEST, true));
 

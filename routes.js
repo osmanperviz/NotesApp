@@ -15,6 +15,8 @@ router.post('/register', RegistrationController.register)
 router
   .get('/notes', NotesController.all)
   .post('/notes', AuthService.autenticate,  NotesController.create)
+  .get('/notes/:notes_id', AuthService.autenticate,  NotesController.show)
+  .put('/notes/:notes_id', AuthService.autenticate,  NotesController.update)
 
 
 export default router

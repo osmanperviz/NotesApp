@@ -20,7 +20,7 @@ class AuthService {
 
       if(!user.isValidPassword(password)) return Promise.reject(new APIError('Not valid password', HttpStatus.UNAUTHORIZED, true))
 
-      const token = jwt.sign(user.username, config.secret)
+      const token = jwt.sign(user, config.secret)
 
       return Promise.resolve({ token: token })
 
@@ -38,7 +38,7 @@ class AuthService {
 
     try {
       const decodedToken = await jwt.verify(token, config.secret);
-      req.currentUser = { username: decodedToken._doc.username, id:  mongoose.Types.ObjectId(decodedToken._doc._id) };
+      req.currentUser = { username: decodedToken._doc.username, id: mongoose.Types.ObjectId(decodedToken._doc._id) };
       next();
     } catch (error) {
       return res.status(error.status).json({ message: error.message });
