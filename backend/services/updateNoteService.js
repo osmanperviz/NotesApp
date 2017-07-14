@@ -7,9 +7,8 @@ class UpdateNoteService {
   static async perform(params) {
     try {
       const { id, attributes } = params
-      debugger;
-      const updatedNote = await Notes.findOneAndUpdate({ _id: mongoose.Types.ObjectId(id) },  { "$set": attributes } , { new: true })
-      return Promise.resolve(updatedNote )
+      const updatedNote = await Notes.findOneAndUpdate( { _id: mongoose.Types.ObjectId(id) },  { "$set": attributes } , { new: true })
+      return Promise.resolve(updatedNote)
     } catch (error) {
       return Promise.reject(new APIError(error.message, error.status, true))
     }

@@ -1,6 +1,10 @@
 import app from './backend/app';
 
-const { PORT = 4000 } = process.env;
+let env  = process.env.NODE_ENV;
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-  
+let port;
+if(env !== 'test') {
+  PORT = process.env.PORT || 4000;
+}
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -34,8 +34,8 @@ class NotesController {
   }
 
   static async show (req, res, next) {
-    const { id } = req.body
-    const notes = await Notes.findOne({ _id: id})
+    const { notes_id } = req.params
+    const notes = await Notes.findOne({ _id: notes_id, _creator: req.currentUser.id })
     res.status(200).json({ notes: notes })
   }
 
