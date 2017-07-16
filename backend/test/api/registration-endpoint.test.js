@@ -18,7 +18,7 @@ describe('api/register', () => {
         mockObj.restore();
     });
 
-    it('should retutn success when registration service return success', (done) => {
+    it('should return success when registration service return success', (done) => {
        request(app)
         .post('/api/register')
         .send({username: 'somme usersnamme', password: 'test password'})

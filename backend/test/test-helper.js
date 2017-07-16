@@ -5,5 +5,6 @@ import mongoose from 'mongoose';
  };
 
  module.exports.destroyDB = () => {
+   mongoose.connection.close()
    mongoose.connection.db.dropDatabase();
  };
