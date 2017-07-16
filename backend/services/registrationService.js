@@ -9,7 +9,6 @@ class RegistrationService {
 
   static async register(credentials) {
     const { username, password } = credentials
-
     if (username === undefined && password === undefined) return Promise.reject(new APIError('Username or password not provided', HttpStatus.UNAUTHORIZED, true))
 
     const salt = bcrypt.genSaltSync(10);
@@ -23,8 +22,8 @@ class RegistrationService {
 
     try {
       const savedUser = await newUser.save()
-      const token = jwt.sign(savedUser, config.secret)
 
+      const token = jwt.sign(savedUser, config.secret)
       return Promise.resolve({token: token})
     } catch (error) {
       return Promise.reject(new APIError(error.message, error.status, true))

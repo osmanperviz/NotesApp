@@ -7,7 +7,7 @@ import middlewares from './middlewares'
 
 const app = express();
 
-db.connect(config.database)
+db.createConnection(config.database)
 
 app.use(middlewares())
 

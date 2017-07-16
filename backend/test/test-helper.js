@@ -1,12 +1,11 @@
 import mongoose from 'mongoose';
-import mockgoose from 'mockgoose';
 
-mockgoose(mongoose);
+module.export = function() {
+  before((done) => {
+    mongoose.connect('mongodb://localhost/test', done);
+  });
 
-module.exports.createDB = (cb) => {
-  mongoose.connect('mongodb://localhost/test', cb);
-};
-
-module.exports.destroyDB = () => {
-  mongoose.disconnect();
-};
+  after((done) => {
+   mongoose.connection.db.dropDatabase(done);
+  });
+}
