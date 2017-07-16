@@ -1,0 +1,28 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Job notes app"
+  },
+  "host": "localhost:4000",
+  "basePath": "/backend",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/register": {
+      "post": {
+        "description": "Registration endpoint",
+        "summary": "Place where user can register to the app",
+        "parameters": null,
+        "responses": null
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ let env  = process.env.NODE_ENV;
 
 let port;
 if(env !== 'test') {
-  PORT = process.env.PORT || 4000;
+  port = process.env.PORT || 4000;
 }
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
