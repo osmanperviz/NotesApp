@@ -10,8 +10,9 @@ factory.define('user', User, {
   password: () => faker.internet.password(),
 });
 
-factory.define('notes', Notes,{
-
+factory.define('note', Notes, {
+  title: () => faker.lorem.word(),
+  _creator: factory.assoc('user', 'id'),
 });
 
 export default factory;

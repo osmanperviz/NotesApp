@@ -33,15 +33,14 @@ class AuthService {
 
   static async autenticate(req, res, next) {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
-
     if(!token) return res.status(HttpStatus.UNAUTHORIZED).json({ message: "Not provided valid token" });
-
     try {
       const decodedToken = await jwt.verify(token, config.secret);
+
       req.currentUser = { username: decodedToken._doc.username, id: mongoose.Types.ObjectId(decodedToken._doc._id) };
       next();
     } catch (error) {
-      return res.status(error.status).json({ message: error.message });
+      return res.status(401).json({ message: error.message });
     }
 
   }

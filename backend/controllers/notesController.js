@@ -6,6 +6,7 @@ import CreateNoteService from '../services/createNoteservice'
 class NotesController {
 
   static async all (req, res, next) {
+    const { currentUser } = req
     const notes = await Notes.find({ _creator: currentUser.id });
     res.status(200).json({ notes: notes })
   }

@@ -5,7 +5,6 @@ import sinon from 'sinon'
 import app from '../../app'
 import RegistrationService from '../../services/registrationService'
 import APIError from '../../helpers/apiError'
-require('../test-helper')
 
 describe('api/register', () => {
   describe('Success Registration', () => {

@@ -5,7 +5,6 @@ import sinon from 'sinon'
 import app from '../../app'
 import AuthService from '../../services/authService.js'
 import APIError from '../../helpers/apiError'
-require('../test-helper')
 
 describe('api/login', () => {
   var mockObj;
