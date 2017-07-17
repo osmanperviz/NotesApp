@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import factory from '../factory';
-import { createDB, destroyDB } from '../test-helper'
 import sinon from 'sinon'
 import app from '../../app'
 import AuthService from '../../services/authService.js'
@@ -12,14 +11,11 @@ describe('api/login', () => {
   var fakeResponse;
 
   beforeEach((done) => {
-    createDB(done);
     mockObj = sinon.stub(AuthService, 'login').callsFake(() => fakeResponse);
   })
 
   afterEach(function () {
      mockObj.restore();
-     destroyDB();
-
   });
 
   describe('Success Login', () => {
