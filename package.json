@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon index.js --exec babel-node --presets es2015,stage-2",
     "start:debbug": "babel-node --debug --presets babel-preset-es2015 --inspect -- index.js",
-    "test": "SET NODE_ENV=test & mocha backend/test --recursive --compilers js:babel-core/register --require babel-polyfill --reporter spec"
+    "test123": "SET NODE_ENV=test & mocha backend/test --recursive --compilers js:babel-core/register --require babel-polyfill --reporter spec",
+    "test": "./scripts/run-tests.sh"
   },
   "author": "",
   "license": "ISC",

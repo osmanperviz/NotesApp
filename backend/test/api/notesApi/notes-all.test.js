@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import app from '../../../app'
 import jwt from 'jsonwebtoken'
 import config from '../../../config/config'
-  import { createDB, destroyDB } from '../../test-helper'
+import { createDB, destroyDB } from '../../test-helper'
 
 describe('GET api/notes', function() {
   var user;
@@ -18,7 +18,7 @@ describe('GET api/notes', function() {
 
   after(function () {
     Jwtmock.restore()
-     destroyDB();
+    destroyDB();
   });
 
   describe('When authorized', () => {
