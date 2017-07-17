@@ -1,4 +1,4 @@
 module.exports = {
     'secret': 'notesapp',
-    'database': 'mongodb://localhost:27017/notes-app'
+    'database': 'mongodb://mongo:27017/notes-app'
 };

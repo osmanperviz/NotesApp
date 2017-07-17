@@ -1,7 +1,7 @@
 import Notes from '../models/notes'
 
-import UpdateNoteService from '../services/updateNoteservice'
-import CreateNoteService from '../services/createNoteservice'
+import UpdateNoteService from '../services/updateNoteService'
+import CreateNoteService from '../services/createNoteService'
 
 class NotesController {
 

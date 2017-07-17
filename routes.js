@@ -1,7 +1,7 @@
 import express from 'express';
 import AuthController from './backend/controllers/authController'
 import RegistrationController from './backend/controllers/registrationController'
-import NotesController from './backend/controllers/NotesController'
+import NotesController from './backend/controllers/notesController'
 
 import AuthService from './backend/services/authService'
 
